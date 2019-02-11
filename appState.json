@@ -1,0 +1,79 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "4ab7b076-e34d-4284-83d7-337f55c076bb": {
+        "id": "4ab7b076-e34d-4284-83d7-337f55c076bb",
+        "parent": null,
+        "name": "ll",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "98c458b5-e706-4b1e-9c69-0fe6b062014c"
+        ],
+        "isRemovable": false,
+        "filePath": "ll"
+      },
+      "98c458b5-e706-4b1e-9c69-0fe6b062014c": {
+        "id": "98c458b5-e706-4b1e-9c69-0fe6b062014c",
+        "parent": "4ab7b076-e34d-4284-83d7-337f55c076bb",
+        "name": "renamedlambda.js",
+        "type": "LAMBDA_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "ll/renamedlambda.js",
+        "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "triggers": [],
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        }
+      }
+    },
+    "deletedFiles": [
+      "ll/lambda.js"
+    ],
+    "rootNode": "4ab7b076-e34d-4284-83d7-337f55c076bb",
+    "openFiles": [
+      "98c458b5-e706-4b1e-9c69-0fe6b062014c"
+    ],
+    "currentFileId": "98c458b5-e706-4b1e-9c69-0fe6b062014c",
+    "resources": {},
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "ll",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1549863656005
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "ll",
+      "url": "https://github.com/Kumudikatest/ll"
+    }
+  }
+}
