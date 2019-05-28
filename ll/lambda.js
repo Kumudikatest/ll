@@ -10,10 +10,11 @@ exports.handler = function (event, context, callback) {
                 StringValue: 'Promotional'
             },
         },
-        PhoneNumber: '0715397214'
+        PhoneNumber: '+940772445224'
     }).promise()
         .then(data => {
             // your code goes here
+            console.log(data);
         })
         .catch(err => {
             // error handling goes here
