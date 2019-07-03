@@ -1,84 +1,76 @@
 {
   "EDITOR_STATE": {
     "allProjectFiles": {
-      "977c66cd-94bb-48ad-9dfe-83ac402f8e60": {
-        "id": "977c66cd-94bb-48ad-9dfe-83ac402f8e60",
+      "3ad0e9fa-464e-4738-b932-ddcfce85a4b3": {
+        "id": "3ad0e9fa-464e-4738-b932-ddcfce85a4b3",
         "parent": null,
         "name": "ll",
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "0e010355-849d-4c89-969a-ffe46b4569b7"
+          "d2f006b9-a22b-476e-99bc-c79741d29dc2",
+          "13d77e3b-26a6-4f01-9296-1b90f04e65eb"
         ],
         "isRemovable": false,
         "filePath": "ll"
       },
-      "0e010355-849d-4c89-969a-ffe46b4569b7": {
-        "id": "0e010355-849d-4c89-969a-ffe46b4569b7",
-        "parent": "977c66cd-94bb-48ad-9dfe-83ac402f8e60",
-        "name": "lambda.js",
+      "d2f006b9-a22b-476e-99bc-c79741d29dc2": {
+        "id": "d2f006b9-a22b-476e-99bc-c79741d29dc2",
+        "parent": "3ad0e9fa-464e-4738-b932-ddcfce85a4b3",
+        "name": "function.js",
         "type": "JS_LAMBDA",
         "isDirectory": false,
         "children": [],
         "isRemovable": true,
-        "filePath": "ll/lambda.js",
-        "code": "exports.handler = function (event, context, callback) {\n    \n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "filePath": "ll/function.js",
+        "code": "let SL_REDIS = require('slappforge-sdk-redis');\nlet clusterManager = require('./ClusterManager');\nconst redis = new SL_REDIS.Redis(clusterManager);\n\nexports.handler = function (request, response) {\n    // You must always quit the redis client after it's used\n    redis.get({\n        redisClient: 'test',\n        params: ['k1']\n    }, function (error, response, redisClient) {\n        if (error) {\n            callback(error);\n            console.log(error);\n        } else {\n            redisClient.quit();\n        }\n    });\n\n    response.send({ \"message\": \"Successfully executed\" });\n}",
         "config": {
-          "runtime": "nodejs8.10",
-          "handler": "handler",
+          "runtime": "nodejs8",
           "timeout": 60,
           "memory": 128,
-          "layers": []
+          "triggerType": 0
         },
-        "triggers": [],
-        "testCases": {
-          "959cce83-1fe8-42f2-8a1c-275eb3446868": {
-            "id": "959cce83-1fe8-42f2-8a1c-275eb3446868",
-            "name": "Unnamed event",
-            "functionId": "0e010355-849d-4c89-969a-ffe46b4569b7",
-            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
+        "triggers": [
+          {
+            "resourceName": "http-trigger",
+            "config": {}
           }
-        }
+        ]
+      },
+      "67229092-b624-4317-a6e0-658042b9e917": {
+        "id": "67229092-b624-4317-a6e0-658042b9e917",
+        "parent": null,
+        "name": "index.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": false,
+        "filePath": "index.js",
+        "code": "// This file is used to register all your cloud functions in GCP.\n// DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\nexports.llfunction = require(\"./ll/function.js\").handler;"
+      },
+      "13d77e3b-26a6-4f01-9296-1b90f04e65eb": {
+        "id": "13d77e3b-26a6-4f01-9296-1b90f04e65eb",
+        "parent": "3ad0e9fa-464e-4738-b932-ddcfce85a4b3",
+        "name": "ClusterManager.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "ll/ClusterManager.js",
+        "code": "module.exports = function() {\n    this.clusters = [];\n\n    this.clusters[\"\"] = {\n        host: process.env.EndPoint_redis,\n        port: 6379,\n        clusterModeEnabled: false\n    };\n};"
       }
     },
     "deletedFiles": [],
-    "rootNode": "977c66cd-94bb-48ad-9dfe-83ac402f8e60",
+    "rootNode": "3ad0e9fa-464e-4738-b932-ddcfce85a4b3",
     "openFiles": [
-      "0e010355-849d-4c89-969a-ffe46b4569b7"
+      "d2f006b9-a22b-476e-99bc-c79741d29dc2"
     ],
-    "currentFileId": "0e010355-849d-4c89-969a-ffe46b4569b7",
+    "currentFileId": "d2f006b9-a22b-476e-99bc-c79741d29dc2",
     "resources": {
-      "snsDirectSMSResource": {
-        "name": "snsDirectSMSResource",
-        "type": "SNS",
-        "config": {
-          "snsType": 1,
-          "numbers": [
-            "0715397214",
-            "+940772445224"
-          ]
-        }
-      },
-      "sqsKTestSQS": {
-        "name": "sqsKTestSQS",
-        "type": "SQS",
-        "config": {
-          "mode": 1,
-          "existing": true,
-          "name": "KTestSQS",
-          "url": "https://sqs.us-east-1.amazonaws.com/318300609668/KTestSQS",
-          "selectedRegion": "us-east-1",
-          "deliveryDelay": "0",
-          "deliveryDelayUnit": "seconds",
-          "queueType": "standardQueue",
-          "defaultVisibilityTimeout": "30",
-          "defaultVisibilityTimeoutUnit": "seconds",
-          "messageRetentionPeriod": "345600",
-          "messageRetentionPeriodUnit": "seconds",
-          "maximumMessageSize": 256,
-          "receiveMessageWaitTime": "0",
-          "queueARN": "arn:aws:sqs:us-east-1:318300609668:KTestSQS"
-        }
+      "http-trigger": {
+        "name": "http-trigger",
+        "type": "http-trigger",
+        "config": {}
       }
     },
     "customTemplate": {
@@ -88,7 +80,7 @@
     "envVariables": [
       {
         "lambdaId": "all",
-        "varKey": "SIGMA_AWS_ACC_ID",
+        "varKey": "AWS_REGION",
         "varValue": null,
         "shouldPersist": false,
         "displayOnly": false,
@@ -96,17 +88,27 @@
       }
     ],
     "packageJSON": {
-      "dependencies": {}
+      "dependencies": {
+        "slappforge-sdk-redis": {
+          "name": "slappforge-sdk-redis",
+          "language": "javascript",
+          "version": "0.0.3",
+          "dev": false,
+          "notRemovable": false
+        }
+      }
     }
   },
   "PROJECT_META": {
     "projectName": "ll",
     "projectDescription": "",
     "projectVersion": "1.0.0",
-    "projectRegion": "us-east-1",
-    "platform": "AWS",
-    "platformRegions": {},
-    "lastSave": 1559042937697
+    "projectRegion": "us-east1",
+    "platform": "GCP",
+    "platformRegions": {
+      "AWS": "us-east-1"
+    },
+    "lastSave": 1562151719451
   },
   "VCS_STATE": {
     "provider": "GitHub",
